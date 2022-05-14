@@ -19,18 +19,25 @@ types:
         repeat: until
         repeat-until: _io.eof
 
+  block_info:
+    seq:
+      - id: block_info
+        type: u2be
+    instances:
+      block_size:
+        value: (block_info & 0b1111111111111110) >> 1
+      is_allocated:
+        value:  block_info & 0b00000000000000001
+        enum: enum_allocated
+
   block_entry:
     seq:
       - id: block_header
-        type: u2be
+        type: block_info
       - id: block
-        type: block(is_allocated)
-    instances:
-      block_size:
-        value: (block_header & 0b1111111111111110) >> 1
-      is_allocated:
-        value:  block_header & 0b00000000000000001
-        enum: enum_allocated
+        type: block(block_header.is_allocated)
+      - id: block_footer
+        type: block_info
 
   block:
     params:
@@ -48,7 +55,7 @@ types:
   block_allocated:
     seq:
       - id: payload
-        size: _parent._parent.block_size
+        size: _parent._parent.block_header.block_size
         doc: Content of Pointer
 
   block_free:
@@ -60,7 +67,7 @@ types:
         type: u8le
         doc: Pointer to Previous Free Block (0 if block is last)
       - id: payload
-        size: _parent._parent.block_size - 16
+        size: _parent._parent.block_header.block_size - 16
         doc: Old Content of Pointer
 
 
