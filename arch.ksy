@@ -16,4 +16,7 @@ seq:
     types:
       block_entry:
         seq:
-# work on this
+          - id: block_size
+            type: b31
+          - id: is_allocated
+            type: b1
