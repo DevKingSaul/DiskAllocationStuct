@@ -45,7 +45,7 @@ types:
   block_allocated:
     seq:
       - id: payload
-        size: _io.size
+        size: _parent._parent.block_size
         doc: Content of Pointer
 
   block_free:
@@ -57,7 +57,7 @@ types:
         type: u8le
         doc: Pointer to Previous Free Block (0 if block is last)
       - id: payload
-        size: _io.size
+        size: _parent._parent.block_size - 16
         doc: Old Content of Pointer
 
 
