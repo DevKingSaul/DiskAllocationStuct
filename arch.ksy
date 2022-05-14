@@ -27,9 +27,9 @@ types:
         type: block(is_allocated)
     instances:
       block_size:
-        value: (block_header & 0b11111110) >> 1
+        value: (block_header & 0b1111111111111110) >> 1
       is_allocated:
-        value:  block_header & 0b00000001
+        value:  block_header & 0b00000000000000001
         enum: enum_allocated
 
   block:
