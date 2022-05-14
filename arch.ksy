@@ -1,5 +1,5 @@
 meta:
-  id: diskalloc
+  id: file
   title: File Allocation Pointer
   endian: le
 seq:
