@@ -1,13 +1,13 @@
 meta:
   id: file
   title: File Allocation Pointer
-  endian: le
+  endian: be
 seq:
   - id: head_pointer
-    type: u8le
+    type: u8be
     doc: The first free block. (0 if none are free)
   - id: end_pointer
-    type: u8le
+    type: u8be
     doc: The last free block.
   - id: block_list
     type: block_list
