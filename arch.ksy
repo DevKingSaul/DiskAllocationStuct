@@ -10,15 +10,11 @@ seq:
     type: u8be
     doc: The last free block.
   - id: block_list
-    type: block_list
-types:
-  block_list: 
-    seq:
-      - id: block
-        type: block_entry
-        repeat: until
-        repeat-until: _io.eof
+    type: block_entry
+    repeat: until
+    repeat-until: _io.eof
 
+types:
   block_info:
     seq:
       - id: block_info
