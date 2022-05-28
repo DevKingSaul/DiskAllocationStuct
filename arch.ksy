@@ -3,6 +3,9 @@ meta:
   title: File Allocation Pointer
   endian: be
 seq:
+  - id: entry_pointer
+    type: u8be
+    doc: This pointer is used for Applications which integrate Disk Allocation.
   - id: head_pointer
     type: u8be
     doc: The first free block. (0 if none are free)
@@ -57,10 +60,10 @@ types:
   block_free:
     seq:
       - id: next_pointer
-        type: u8le
+        type: u8be
         doc: Pointer to Next Free Block (0 if block is first)
       - id: prev_pointer
-        type: u8le
+        type: u8be
         doc: Pointer to Previous Free Block (0 if block is last)
       - id: payload
         size: _parent._parent.block_header.block_size - 16
