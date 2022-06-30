@@ -15,7 +15,7 @@ seq:
   - id: block_list
     type: block_entry
     repeat: until
-    repeat-until: _io.eof
+    repeat-until: _io.eof or _.block_header.block_info == 0
 
 types:
   block_info:
@@ -35,6 +35,7 @@ types:
         type: block_info
       - id: block
         type: block(block_header.is_allocated)
+        if: block_header.block_info != 0
       - id: block_footer
         type: block_info
 
